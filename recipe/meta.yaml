@@ -1,3 +1,4 @@
+{% set python_min = '3.10' %}
 {% set name = "ibis-ml" %}
 {% set version = "0.1.3" %}
 
@@ -12,15 +13,15 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.10
+    - python {{ python_min }}
     - flit-core >=3.2,<4
     - pip
   run:
-    - python >=3.10
+    - python >={{ python_min }}
     - ibis-framework
 
 test:
@@ -30,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://ibis-project.github.io/ibis-ml/
